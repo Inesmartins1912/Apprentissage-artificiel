@@ -20,5 +20,6 @@ Aucune annotation manuelle n'est à effectuer.
 
 ## Contributeurs
 
-- [Mickaela MASTRODICASA](https://github.com/mickaela-mstr)
+- [Ihsane GHAMMATT-DEBBOUN](https://github.com/Ihsane39)
 - [Inès MARTINS](https://github.com/Inesmartins1912)
+- [Mickaela MASTRODICASA](https://github.com/mickaela-mstr)
