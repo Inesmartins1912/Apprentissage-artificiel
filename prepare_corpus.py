@@ -86,22 +86,6 @@ def parse_test(path_test, path_ref):
 
     return partis
 
-#Construction du dataframe
-
-def build_dataframe(partis_dict):
-    texts, labels = [], []
-
-    for parti, discours in partis_dict.items():
-        texts.extend(discours)
-        labels.extend([parti] * len(discours))
-
-    df = pd.DataFrame({
-        "Discours": texts,
-        "Parti": labels
-    })
-
-    return df.drop_duplicates(subset = ["Discours"]).reset_index(drop = True)
-
 # Pipeline principale
 
 train = parse_train(
@@ -131,7 +115,7 @@ df = pd.DataFrame({
     "Parti": labels
 })
 
-# Suppression des doublons
+# Suppression des doublons à mettre ou non selon ce que l'on veut comme résultat
 df = df.drop_duplicates(subset = ["Discours"])
 
 # Équilibrage et mélange des classes
