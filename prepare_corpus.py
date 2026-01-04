@@ -89,12 +89,12 @@ def parse_test(path_test, path_ref):
 # Pipeline principale
 
 train = parse_train(
-    "/home/ines/Documents/Fac/Master 2/Apprentissage artificiel/deft09_parlement_appr_fr.xml"
+    "./Fichiers_xml_et_txt/deft09_parlement_appr_fr.xml"
 )
 
 test = parse_test(
-    path_test = "/home/ines/Documents/Fac/Master 2/Apprentissage artificiel/deft09_parlement_appr_fr.xml",
-    path_ref = "/home/ines/Documents/Fac/Master 2/Apprentissage artificiel/deft09_parlement_ref_fr.txt"
+    path_test = "./Fichiers_xml_et_txt/deft09_parlement_appr_fr.xml",
+    path_ref = "./Fichiers_xml_et_txt/deft09_parlement_ref_fr.txt"
 )
 
 # Fusion train/test
