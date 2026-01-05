@@ -36,9 +36,30 @@ from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, a
 
 # nltk.download("stopwords")
 
-STOP_FR = set(stopwords.words("french"))
-STOP_EN = set(stopwords.words("english"))
-STOP_IT = set(stopwords.words("italian"))
+EXTRA_FR = {"monsieur","madame","président","présidente","vice","rapport","rapporteur","rapporteure",
+    "commission","commissaire","parlement","parlementaire","européen","européenne","europe",
+    "union","conseil","état","états","membre","membres","pays","gouvernement",
+    "directive","règlement","amendement","amendements","proposition","propositions","projet",
+    "texte","article","articles","vote","voter","votation","séance","session","plénière",
+    "débat","débats","collègue","collègues","mesdames","messieurs","merci"}
+
+EXTRA_EN = {"mr","madam","president","vice","rapporteur","report","reports",
+    "commission","commissioner","parliament","parliamentary","european","europe",
+    "union","council","state","states","member","members","country","government",
+    "directive","regulation","amendment","amendments","proposal","proposals","text","article","articles",
+    "vote","voting","session","plenary","debate","debates","colleague","colleagues",
+    "ladies","gentlemen","thank","thanks"}
+
+EXTRA_IT = {"signor","signora","presidente","vice","relatore","relazione","relazioni",
+    "commissione","commissario","parlamento","parlamentare","europeo","europea","europa",
+    "unione","consiglio","stato","stati","membro","membri","paese","governo",
+    "direttiva","regolamento","emendamento","emendamenti","proposta","proposte","testo","articolo","articoli",
+    "voto","votare","sessione","seduta","plenaria","dibattito","dibattiti","collega","colleghi",
+    "grazie"}
+
+STOP_FR = set(stopwords.words("french")) | EXTRA_FR
+STOP_EN = set(stopwords.words("english")) | EXTRA_EN
+STOP_IT = set(stopwords.words("italian")) | EXTRA_IT
 
 def clean_text(text, lang):
     text = str(text).lower()
