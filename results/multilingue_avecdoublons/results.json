@@ -1,0 +1,35 @@
+[
+  {
+    "model": "RandomForest (TF-IDF+SVD)",
+    "P_macro": 0.8063934713868939,
+    "R_macro": 0.7836823219271437,
+    "F1_macro": 0.7899369514768376,
+    "Accuracy": 0.7892120175344809,
+    "best_params": {
+      "rf__max_depth": null,
+      "rf__n_estimators": 400,
+      "svd__n_components": 200
+    }
+  },
+  {
+    "model": "SVM (LinearSVC)",
+    "P_macro": 0.7830441877922156,
+    "R_macro": 0.7857122846427937,
+    "F1_macro": 0.7839147312990666,
+    "Accuracy": 0.7847749385223992,
+    "best_params": {
+      "clf__C": 0.3,
+      "clf__class_weight": "balanced"
+    }
+  },
+  {
+    "model": "Naive Bayes (MultinomialNB)",
+    "P_macro": 0.7034018930278186,
+    "R_macro": 0.6838891059936684,
+    "F1_macro": 0.6894889361300713,
+    "Accuracy": 0.6888164225382231,
+    "best_params": {
+      "clf__alpha": 0.1
+    }
+  }
+]
