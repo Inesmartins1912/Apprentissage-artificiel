@@ -139,6 +139,28 @@ def save_f1_plot(results, out_png):
     fig.savefig(out_png, dpi=200)
     plt.close(fig)
 
+def save_class_plot(df_cls, out_png, title):
+    # df_cls colonnes: Parti, Precision, Recall (float)
+    partis = df_cls["Parti"].tolist()
+    prec = df_cls["Precision"].tolist()
+    rec = df_cls["Recall"].tolist()
+
+    fig, ax = plt.subplots()
+    x = list(range(len(partis)))
+    width = 0.4
+
+    ax.bar([i - width/2 for i in x], prec, width=width, label="Precision")
+    ax.bar([i + width/2 for i in x], rec, width=width, label="Recall")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(partis, rotation=25, ha="right")
+    ax.set_ylabel("Score")
+    ax.set_title(title)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(out_png, dpi=200)
+    plt.close(fig)
+
 # On utilise SVM, Naive Bayes et Random Forest avec SVD pour réduire la dimensionnalité
 def run(train_csv, test_csv, out_dir, cv, jobs, seed, skip_rf):
     os.makedirs(out_dir, exist_ok=True)
@@ -189,6 +211,22 @@ def run(train_csv, test_csv, out_dir, cv, jobs, seed, skip_rf):
         results.append({"model": "RandomForest (TF-IDF+SVD)", "P_macro": p, "R_macro": r, "F1_macro": f1, "Accuracy": acc, "best_params": gs_rf.best_params_})
 
     results.sort(key=lambda d: d["F1_macro"], reverse=True)
+
+    best = results[0]
+    best_name = best["model"]
+    if best_name.startswith("SVM"):
+        best_pred = pred_svm
+    elif best_name.startswith("Naive Bayes"):
+        best_pred = pred_nb
+    else:
+        best_pred = pred_rf 
+    if best_pred is not None:
+        p_cls, r_cls, f1_cls, support_cls = precision_recall_fscore_support(y_test, best_pred, labels=labels, average=None, zero_division=0)
+        df_cls = pd.DataFrame({"Parti": labels,"Precision": p_cls, "Recall": r_cls, "F1": f1_cls, "Support": support_cls})
+        per_class_csv = os.path.join(out_dir, "best_per_class.csv")
+        df_cls.to_csv(per_class_csv, index=False, encoding="utf-8")
+        per_class_png = os.path.join(out_dir, "best_precision_recall_by_party.png")
+        save_class_plot(df_cls, out_png=per_class_png, title=f"Precision / Recall par parti - {best_name}")
 
     with open(os.path.join(out_dir, "results.json"), "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
