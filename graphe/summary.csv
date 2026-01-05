@@ -1,3 +1,0 @@
-dataset,model,P_macro,R_macro,F1_macro,Accuracy,best_params
-multilingue_sansdoublons,SVM (LinearSVC),0.48868671336754826,0.49316539966916784,0.4902659299512904,0.49564719358533793,"{""clf__C"": 0.3, ""clf__class_weight"": ""balanced""}"
-multilingue_sansdoublons,Naive Bayes (MultinomialNB),0.46608345336681045,0.44084719431880603,0.4420627528222577,0.4517754868270332,"{""clf__alpha"": 0.1}"
